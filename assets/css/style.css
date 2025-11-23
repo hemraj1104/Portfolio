@@ -4,7 +4,7 @@
 
 
 /**
- * copyright 2022 @codewithsadee
+ * copyright 2022 @hemraj1104
  */
 
 
@@ -511,6 +511,42 @@ main {
 /**
  * #service 
  */
+ .education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.education-header .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.resume-btn-wrapper { 
+  display: flex;
+  justify-content: flex-end; /* --> shifts ONLY this button */
+}
+
+.resume-btn {
+  display: inline-block;
+  margin-top: 0px;
+  margin-right: 10px;
+  padding: 10px 25px;
+  border: 2px solid #f7d774;
+  color: #f7d774;
+  background: #151515;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.resume-btn:hover {
+  background: #f7d774;
+  color: #151515;
+}
+
 
 .service { margin-bottom: 35px; }
 
@@ -770,6 +806,9 @@ main {
 /**
  * education and experience 
  */
+
+.viewresume
+
 
 .timeline { margin-bottom: 30px; }
 
