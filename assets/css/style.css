@@ -869,44 +869,226 @@ main {
 }
 
 
-/**
- * skills 
- */
+/* ========= LAYOUT (70% / 30%) ========= */
 
-.skills-title { margin-bottom: 20px; }
-
-.skills-list { padding: 20px; }
-
-
-.skills-item:not(:last-child) { margin-bottom: 15px; }
-
-.skill .title-wrapper {
+.skills-container {
   display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 8px;
+  gap: 25px;
+  margin-top: 25px;
 }
 
-.skill .title-wrapper data {
-  color: var(--light-gray);
-  font-size: var(--fs-7);
-  font-weight: var(--fw-300);
+.tech-stack-card {
+  width: 70%;
 }
 
-.skill-progress-bg {
-  background: var(--jet);
+
+/* ========= TECH STACK BADGE ========= */
+
+.tech-badge {
+  /* display: inline-block; */
+  width: fit-content;
+  margin-top: 0px;
+  margin-right: 10px;
+  padding: 10px 25px;
+  border: 2px solid #f7d774;
+  color: #151515;
+  background: #f7d774;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+
+
+/* ========= ICON SLIDER (Infinite Loop) ========= */
+
+.tech-slider {
+  overflow: hidden;        /* keeps icons inside card */
   width: 100%;
-  height: 8px;
-  border-radius: 10px;
+  padding: 10px 0;
+  position: relative;
 }
 
-.skill-progress-fill {
-  background: var(--text-gradient-yellow);
-  height: 100%;
-  border-radius: inherit;
+.tech-icons {
+  display: flex;
+  gap: 18px;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: infiniteScroll 18s linear infinite;
 }
 
+@keyframes infiniteScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
+/* ========= ICON BLOCKS ========= */
+
+.tech-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: visible;      /* allow tooltip only */
+  z-index: 50;
+  flex-shrink: 0;         /* never shrink */
+}
+
+.tech-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+/* ========= TOOLTIP ========= */
+
+.tech-icon:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  background: #fff;
+  color: #000;
+  font-size: 13px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-weight: 600;
+  z-index: 10000;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+/* ========= TEXT ========= */
+
+.tech-title {
+  font-size: 21px;
+  font-weight: 600;
+  margin-top: 18px;
+}
+
+.tech-subtitle {
+  margin-top: 10px;
+  font-size: 15px;
+  opacity: 0.45;
+  line-height: 1.6;
+  color: var(--light-gray);
+}
+
+/* --- LAYOUT & SIZING --- */
+.skills-container {
+    display: flex;
+    gap: 25px;
+    margin-top: 25px;
+    align-items: stretch; /* Forces equal height for sibling flex items */
+}
+
+.tech-stack-card {
+    width: 70%;
+    /* Add flex properties to make content stretch if needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spreads content if it has header/footer */
+}
+
+.github-card {
+    width: 30%;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-2);
+    /* Ensure it acts as a flex container for its own content */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligns content to the top */
+    min-height: 200px; /* Give it a min-height to prevent it from collapsing if empty */
+}
+
+/* --- GITHUB HEADER & TEXT --- */
+.github-header {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and username */
+    margin-bottom: 10px;
+}
+
+.github-icon-small {
+    width: 20px; /* Adjust size as needed */
+    height: 20px;
+    filter: invert(1); /* To make it white on dark background if it's black by default */
+}
+
+.github-username-display {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--light-gray); /* Adjust to your text color variable */
+    margin: 0; /* Remove default margin from h3 */
+}
+
+.github-activity-count,
+.github-current-month {
+    font-size: 14px;
+    color: var(--light-gray);
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+/* --- GITHUB GRID (HEATMAP) --- */
+.github-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows squares to wrap to the next line */
+    gap: 3px; /* Smaller gap for a denser look */
+    margin-top: 15px;
+    justify-content: flex-start; /* Aligns squares to the left */
+    flex-grow: 1; /* Allows the grid to take up available space */
+    align-content: flex-start; /* Aligns wrapped lines to the top */
+    overflow: hidden; /* Hide any overflow if too many squares */
+}
+
+.github-square {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px; /* Slightly smaller border-radius for the heatmap cells */
+    background: #161b22; /* Default empty cell color */
+    transition: 0.15s ease;
+    flex-shrink: 0; /* Prevents squares from shrinking */
+}
+
+/* GitHub Contribution Levels */
+.github-square[data-level="1"] { background: #0e4429; }
+.github-square[data-level="2"] { background: #006d32; }
+.github-square[data-level="3"] { background: #26a641; }
+.github-square[data-level="4"] { background: #39d353; }
+
+/* On hover – show outline */
+.github-square:hover {
+    outline: 2px solid #f7d774; /* Use your accent color */
+    transform: scale(1.1); /* Slightly smaller hover effect */
+    z-index: 10;
+}
+
+/* --- GITHUB TOOLTIP --- */
+.github-tooltip {
+    position: absolute;
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 99999;
+    pointer-events: none; /* Allows clicks to pass through */
+    opacity: 0;
+    transform: translate(-50%, -10px);
+    border: 1px solid #444;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    transition: opacity 0.15s ease;
+}
 
 
 
@@ -1919,3 +2101,4 @@ textarea.form-input::-webkit-resizer { display: none; }
   .timeline-text { max-width: 700px; }
 
 }
+
