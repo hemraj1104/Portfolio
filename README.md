@@ -40,6 +40,4 @@ cd Portfolio
 ```
 ---
 ### 🌐 Live Website
-```
 https://hemraj1104.github.io/Portfolio/
-```
